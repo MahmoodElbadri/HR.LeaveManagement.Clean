@@ -1,4 +1,5 @@
 using HR.LeaveManagement.Application.Contracts.Persistence;
+using HR.LeaveManagement.Application.Exceptions;
 using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveType.Commands.DeleteLeaveType;
@@ -12,8 +13,13 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
 
     public async Task<Unit> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
     {
-        //confirm it exists
+        //retrieve domain entity object
         var leaveTypeToDelete = await _leaveTypeRepository.GetByIdAsync(id: request.ID);
+        //confirm it exists
+        if (leaveTypeToDelete is not null)
+        {
+            throw new NotFoundException(nameof(Domain.LeaveType), request.ID);
+        }
 
         //delete it
         await _leaveTypeRepository.DeleteAsync(leaveTypeToDelete);
