@@ -18,6 +18,6 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
         //delete it
         await _leaveTypeRepository.DeleteAsync(leaveTypeToDelete);
         //just get the job done
-        return Unit.Value;
+        return Unit.Value; //it's basically saying "the operation is complete" without returning any meaningful data.
     }
 }
