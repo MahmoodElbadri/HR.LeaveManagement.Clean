@@ -18,7 +18,7 @@ public class GetLeaveTypeDetailsQueryHandler:IRequestHandler<GetLeaveTypeDetails
     {
         //Query DB
         var leaveTypeDetails = await _leaveTypeRepository.GetByIdAsync(request.id);
-        //Convert Data object into Dto
+        //Convert a Data object into Dto
         var leaveTypeDetailsDto = _mapper.Map<LeaveTypeDetailsDto>(leaveTypeDetails);
         //return Data
         return leaveTypeDetailsDto;
