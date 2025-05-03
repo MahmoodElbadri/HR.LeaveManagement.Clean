@@ -2,7 +2,7 @@ using AutoMapper;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using MediatR;
 
-namespace HR.LeaveManagement.Application.Features.LeaveType.Commands;
+namespace HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
 
 public class CreateLeaveTypeCommandHandler:IRequestHandler<CreateLeaveTypeCommand,int>
 {
