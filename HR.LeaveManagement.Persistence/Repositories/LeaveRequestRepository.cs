@@ -16,7 +16,7 @@ public class LeaveRequestRepository : GenericRepository<LeaveRequest>, ILeaveReq
         var leaveRequest = await _context
             .LeaveRequests
             .AsNoTracking()
-            .Include(tmp=>tmp.LeaveType)
+            .Include(tmp => tmp.LeaveType)
             .FirstOrDefaultAsync(tmp => tmp.ID == id);
         return leaveRequest;
     }
@@ -34,8 +34,8 @@ public class LeaveRequestRepository : GenericRepository<LeaveRequest>, ILeaveReq
     {
         var leaveRequests = await _context
             .LeaveRequests
-            .Where(tmp=>tmp.RequestingEmployeeID==userId)
-            .Include(tmp=>tmp.LeaveType)
+            .Where(tmp => tmp.RequestingEmployeeID == userId)
+            .Include(tmp => tmp.LeaveType)
             .ToListAsync();
         return leaveRequests;
     }
