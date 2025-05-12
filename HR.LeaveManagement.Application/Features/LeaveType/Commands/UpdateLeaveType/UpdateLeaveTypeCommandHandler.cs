@@ -26,7 +26,7 @@ public class UpdateLeaveTypeCommandHandler:IRequestHandler<UpdateLeaveTypeComman
         var validationResult = await validator.ValidateAsync(request);
         if (validationResult.Errors.Any())
         {
-            _logger.LogWarning($"Validation errors in Update Request {0} - {1}", nameof(LeaveType), request.Name);
+            _logger.LogWarning($"Validation errors in Update Request {0} - {1}", nameof(LeaveType), request.Id);
             throw new BadRequestException("Invalid Leave type", validationResult);
         }
         //convert dto to object model

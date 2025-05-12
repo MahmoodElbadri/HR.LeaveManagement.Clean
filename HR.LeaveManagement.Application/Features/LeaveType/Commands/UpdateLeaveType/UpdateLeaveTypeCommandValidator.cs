@@ -24,6 +24,16 @@ public class UpdateLeaveTypeCommandValidator:AbstractValidator<UpdateLeaveTypeCo
         RuleFor(tmp=>tmp)
             .MustAsync(LeaveTypeNameUnique)
             .WithMessage("Leave Type Name must be unique.");
+
+        RuleFor(tmp => tmp.Id)
+            .NotNull()
+            .MustAsync(LeaveTypeMustExist);
+    }
+
+    private async Task<bool> LeaveTypeMustExist(int id, CancellationToken token)
+    {
+        var leaveType =  await _leaveTypeRepository.GetByIdAsync(id);
+        return leaveType is not null;
     }
 
     private Task<bool> LeaveTypeNameUnique(UpdateLeaveTypeCommand command, CancellationToken token)
