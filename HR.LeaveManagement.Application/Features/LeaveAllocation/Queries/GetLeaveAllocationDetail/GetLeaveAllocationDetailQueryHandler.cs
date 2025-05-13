@@ -3,7 +3,7 @@ using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using MediatR;
 
-namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Queries;
+namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAllocationDetail;
 
 public class GetLeaveAllocationDetailQueryHandler:IRequestHandler<GetLeaveAllocationDetailQuery,LeaveAllocationDetailDto>
 {

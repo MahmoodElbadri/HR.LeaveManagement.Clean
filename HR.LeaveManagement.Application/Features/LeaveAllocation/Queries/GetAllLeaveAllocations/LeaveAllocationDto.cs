@@ -1,8 +1,8 @@
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 
-namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Queries;
+namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetAllLeaveAllocations;
 
-public class LeaveAllocationDetailDto
+public class LeaveAllocationDto
 {
     public int  ID { get; set; }
     public int NumberOfDays { get; set; }
