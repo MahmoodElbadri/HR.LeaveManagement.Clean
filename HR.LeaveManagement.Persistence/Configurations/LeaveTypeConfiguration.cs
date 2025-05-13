@@ -13,8 +13,8 @@ public class LeaveTypeConfiguration : IEntityTypeConfiguration<LeaveType>
             {
                 ID = 1,
                 Name = "Vacation",
-                DateCreated = DateTime.Now,
-                DateModified = DateTime.Now,
+                DateCreated = new DateTime(2023, 01, 01),
+                DateModified = new DateTime(2023, 01, 01),
                 DefaultDays = 10,
             }
         );
