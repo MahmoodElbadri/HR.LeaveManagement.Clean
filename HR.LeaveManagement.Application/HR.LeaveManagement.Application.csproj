@@ -17,4 +17,10 @@
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\LeaveAllocation\Commands\" />
+      <Folder Include="Features\LeaveRequest\Commands\" />
+      <Folder Include="Features\LeaveRequest\Queries\" />
+    </ItemGroup>
+
 </Project>
