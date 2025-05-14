@@ -19,7 +19,6 @@
 
     <ItemGroup>
       <Folder Include="Features\LeaveRequest\Commands\DeleteLeaveRequest\" />
-      <Folder Include="Features\LeaveRequest\Commands\UpdateLeaveRequest\" />
     </ItemGroup>
 
 </Project>
