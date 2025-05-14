@@ -28,7 +28,7 @@ public class ChangeLeaveRequestCommandHandler : IRequestHandler<ChangeLeaveReque
         _mapper = mapper;
         this._emailSender = emailSender;
     }
-    
+
     public async Task<Unit> Handle(ChangeLeaveRequestCommand request, CancellationToken cancellationToken)
     {
         var leaveRequest = await _leaveRequestRepository.GetByIdAsync(request.ID);
