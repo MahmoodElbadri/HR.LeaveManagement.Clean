@@ -1,4 +1,6 @@
-﻿using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
+﻿using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
+using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
+using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -27,15 +29,18 @@ public class LeaveTypesController : ControllerBase
 
     // GET api/<LeaveTypesController>/5
     [HttpGet("{id}")]
-    public string Get(int id)
+    public async Task<LeaveTypeDetailsDto> Get(int id)
     {
-        return "value";
+        var leaveType = await _mediator.Send(new GetLeaveTypeDetailsQuery(id));
+        return leaveType;
     }
 
     // POST api/<LeaveTypesController>
     [HttpPost]
-    public void Post([FromBody] string value)
+    public async Task<IActionResult> Post([FromBody] LeaveTypeDetailsDto leaveType)
     {
+        var response = await _mediator.Send(leaveType);
+        return CreatedAtAction(nameof(Get), new { id = response });
     }
 
     // PUT api/<LeaveTypesController>/5
