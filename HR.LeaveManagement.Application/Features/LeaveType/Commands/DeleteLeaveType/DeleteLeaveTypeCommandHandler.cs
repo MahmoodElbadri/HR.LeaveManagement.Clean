@@ -16,7 +16,7 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
         //retrieve domain entity object
         var leaveTypeToDelete = await _leaveTypeRepository.GetByIdAsync(id: request.ID);
         //confirm it exists
-        if (leaveTypeToDelete is not null)
+        if (leaveTypeToDelete is null)
         {
             throw new NotFoundException(nameof(Domain.LeaveType), request.ID);
         }
