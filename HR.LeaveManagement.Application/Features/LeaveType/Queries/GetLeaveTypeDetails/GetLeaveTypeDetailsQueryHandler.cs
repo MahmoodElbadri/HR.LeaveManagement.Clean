@@ -20,8 +20,11 @@ public class GetLeaveTypeDetailsQueryHandler : IRequestHandler<GetLeaveTypeDetai
     public async Task<LeaveTypeDetailsDto> Handle(GetLeaveTypeDetailsQuery request, CancellationToken cancellationToken)
     {
         //Query DB
-        var leaveTypeDetails = await _leaveTypeRepository.GetByIdAsync(request.id) ??
-                               throw new NotFoundException(nameof(Domain.LeaveType), request.id);
+        var leaveTypeDetails = await _leaveTypeRepository.GetByIdAsync(request.id);
+        if (leaveTypeDetails is null)
+        {
+            throw new NotFoundException("Can't be found", nameof(request));
+        }
 
         //Convert a Data object into Dto
         var leaveTypeDetailsDto = _mapper.Map<LeaveTypeDetailsDto>(leaveTypeDetails);

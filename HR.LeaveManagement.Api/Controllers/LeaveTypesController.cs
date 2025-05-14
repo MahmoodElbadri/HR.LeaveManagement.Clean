@@ -1,4 +1,5 @@
 ﻿using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
+using HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using MediatR;
@@ -37,6 +38,8 @@ public class LeaveTypesController : ControllerBase
 
     // POST api/<LeaveTypesController>
     [HttpPost]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
     public async Task<IActionResult> Post([FromBody] LeaveTypeDetailsDto leaveType)
     {
         var response = await _mediator.Send(leaveType);
@@ -45,8 +48,14 @@ public class LeaveTypesController : ControllerBase
 
     // PUT api/<LeaveTypesController>/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
+    public async Task<IActionResult> Put(UpdateLeaveTypeCommand leaveTypeCommand)
     {
+        await _mediator.Send(leaveTypeCommand);
+        return NoContent();
     }
 
     // DELETE api/<LeaveTypesController>/5
