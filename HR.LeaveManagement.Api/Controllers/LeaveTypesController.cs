@@ -41,7 +41,7 @@ public class LeaveTypesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Post([FromBody] LeaveTypeDetailsDto leaveType)
+    public async Task<IActionResult> Post([FromBody] CreateLeaveTypeCommand leaveType)
     {
         var response = await _mediator.Send(leaveType);
         return CreatedAtAction(nameof(Get), new { id = response });
