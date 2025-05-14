@@ -1,4 +1,5 @@
 ﻿using HR.LeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
+using HR.LeaveManagement.Application.Features.LeaveType.Commands.DeleteLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
@@ -60,7 +61,16 @@ public class LeaveTypesController : ControllerBase
 
     // DELETE api/<LeaveTypesController>/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesDefaultResponseType]
+    public async Task<IActionResult> Delete(int id)
     {
+        var command = new DeleteLeaveTypeCommand
+        {
+            ID = id
+        };
+        await _mediator.Send(command);
+        return NoContent();
     }
 }
