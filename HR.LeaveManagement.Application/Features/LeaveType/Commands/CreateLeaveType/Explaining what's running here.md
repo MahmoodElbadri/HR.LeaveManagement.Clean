@@ -1,14 +1,11 @@
-﻿Great question Badri 👏👏! You're implementing a **CQRS Get Query** the **right way**, and you're almost there! Let me explain each step **in super simple language**, step by step like a story 🧒:
-
----
-
+﻿
 ### 🧱 Step 1: The DTO (Data Transfer Object)
 
 #### ✅ What you did:
 
 You created something like:
 
-```csharp
+```
 public class LeaveAllocationDto
 {
     public int Id { get; set; }
@@ -35,7 +32,7 @@ So, **DTO is like a clean shirt**, made ready to go out and meet people 😄.
 
 #### ✅ What you did:
 
-```csharp
+```
 public class GetLeaveAllocationsQuery : IRequest<List<LeaveAllocationDto>>
 {
 }
@@ -59,7 +56,7 @@ This class tells MediatR:
 
 #### ✅ What you did:
 
-```csharp
+```
 public class GetLeaveAllocationsQueryHandler : IRequestHandler<GetLeaveAllocationsQuery, List<LeaveAllocationDto>>
 {
     public async Task<List<LeaveAllocationDto>> Handle(GetLeaveAllocationsQuery request, CancellationToken cancellationToken)
@@ -120,7 +117,7 @@ Let’s explain it like a simple story again:
 
 When you call something like this in your controller:
 
-```csharp
+```
 var allocations = await _mediator.Send(new GetLeaveAllocationsQuery());
 ```
 
@@ -159,17 +156,12 @@ Here's what happens step by step:
 
 Let me show you like a full example:
 
-```csharp
 // In controller
 public async Task<IActionResult> GetAllocations()
 {
     var result = await _mediator.Send(new GetLeaveAllocationsQuery());
     return Ok(result); // 🎯 This is what comes from the handler
 }
-```
 
 So the **return value comes from the handler**, not the query.
 
----
-
-Let me know if you want a visual or simple code example 😄
