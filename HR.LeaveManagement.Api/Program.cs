@@ -1,3 +1,4 @@
+using HR.LeaveManagement.Api.Middlewares;
 using HR.LeaveManagement.Application;
 using HR.LeaveManagement.Infrastructure;
 using HR.LeaveManagement.Persistence;
@@ -31,6 +32,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Enable Swagger UI in all environments (not just Development)
 app.UseSwagger();

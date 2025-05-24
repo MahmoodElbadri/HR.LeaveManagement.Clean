@@ -14,7 +14,6 @@ namespace HR.LeaveManagement.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
 public class LeaveAllocationsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -27,7 +26,7 @@ public class LeaveAllocationsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<LeaveAllocationDto>>> Get()
     {
-        var leaveAllocations = await _mediator.Send(new GetLeaveAllocationListQuery);
+        var leaveAllocations = await _mediator.Send(new GetLeaveAllocationListQuery());
         return Ok(leaveAllocations);
     }
 
