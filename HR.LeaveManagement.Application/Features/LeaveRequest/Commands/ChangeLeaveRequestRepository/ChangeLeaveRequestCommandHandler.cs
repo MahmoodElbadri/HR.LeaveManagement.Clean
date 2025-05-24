@@ -1,5 +1,6 @@
 using AutoMapper;
 using HR.LeaveManagement.Application.Contracts.Email;
+using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Models.Email;
@@ -11,17 +12,20 @@ public class ChangeLeaveRequestCommandHandler : IRequestHandler<ChangeLeaveReque
 {
     private readonly IMapper _mapper;
     private readonly IEmailSender _emailSender;
+    private readonly IAppLogger<ChangeLeaveRequestCommandHandler> _logger;
     private readonly ILeaveRequestRepository _leaveRequestRepository;
     private readonly ILeaveTypeRepository _leaveTypeRepository;
     private readonly ILeaveAllocationRepository _leaveAllocationRepository;
 
     public ChangeLeaveRequestCommandHandler(
+        IAppLogger<ChangeLeaveRequestCommandHandler> logger,
         ILeaveRequestRepository leaveRequestRepository,
         ILeaveTypeRepository leaveTypeRepository,
         ILeaveAllocationRepository leaveAllocationRepository,
         IMapper mapper,
         IEmailSender emailSender)
     {
+        this._logger = logger;
         _leaveRequestRepository = leaveRequestRepository;
         _leaveTypeRepository = leaveTypeRepository;
         this._leaveAllocationRepository = leaveAllocationRepository;
@@ -65,7 +69,7 @@ public class ChangeLeaveRequestCommandHandler : IRequestHandler<ChangeLeaveReque
         }
         catch (Exception)
         {
-            // log error
+            _logger.LogWarning("Email not sent");
         }
 
         return Unit.Value;
