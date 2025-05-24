@@ -4,12 +4,12 @@ using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetAllLeaveAllocations;
 
-public class GFetLeaveAllocationListRequestHandler:IRequestHandler<GetLeaveAllocationListQuery,List<LeaveAllocationDto>>
+public class GetLeaveAllocationListRequestHandler:IRequestHandler<GetLeaveAllocationListQuery,List<LeaveAllocationDto>>
 {
     private readonly ILeaveAllocationRepository _repo;
     private readonly IMapper _mapper;
 
-    public GFetLeaveAllocationListRequestHandler(ILeaveAllocationRepository repo, IMapper mapper)
+    public GetLeaveAllocationListRequestHandler(ILeaveAllocationRepository repo, IMapper mapper)
     {
         _repo = repo;
         _mapper = mapper;

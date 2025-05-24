@@ -17,7 +17,7 @@ public class GetLeaveAllocationDetailQueryHandler:IRequestHandler<GetLeaveAlloca
     }
     public async Task<LeaveAllocationDetailDto> Handle(GetLeaveAllocationDetailQuery request, CancellationToken cancellationToken)
     {
-        var leaveAllocation = await _repo.GetLeaveAllocationWithDetails(request.ID);
+        var leaveAllocation = await _repo.GetLeaveAllocationWithDetails(request.ID); //the id which we have from the query remember it?
         if (leaveAllocation is null)
         {
             throw new NotFoundException(nameof(LeaveAllocation), request.ID);

@@ -4,5 +4,5 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllocation.Queries.GetAll
 
 public class GetLeaveAllocationListQuery:IRequest<List<LeaveAllocationDto>>
 {
- public int  ID { get; set; }   
+ public int  ID { get; set; }    //takes it as a parameter
 }
