@@ -95,4 +95,4 @@ You'll see the full Swagger UI to test your APIs 🚀
 
 ## 🧑‍💻 Author
 
-Made by **Badri** as part of his .NET learning journey 🚀  
+Made by **Badri** as part of my .NET learning journey 🚀  
