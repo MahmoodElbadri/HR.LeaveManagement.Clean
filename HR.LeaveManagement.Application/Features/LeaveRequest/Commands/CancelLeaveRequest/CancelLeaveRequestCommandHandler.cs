@@ -1,4 +1,5 @@
 using HR.LeaveManagement.Application.Contracts.Email;
+using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Models.Email;
@@ -11,14 +12,16 @@ public class CancelLeaveRequestCommandHandler : IRequestHandler<CancelLeaveReque
     private readonly ILeaveRequestRepository _leaveRequestRepository;
     private readonly ILeaveAllocationRepository _leaveAllocationRepository;
     private readonly IEmailSender _emailSender;
+    private readonly IAppLogger<CancelLeaveRequestCommandHandler> _logger;
 
     public CancelLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository,
         ILeaveAllocationRepository leaveAllocationRepository,
-        IEmailSender emailSender)
+        IEmailSender emailSender, IAppLogger<CancelLeaveRequestCommandHandler> logger)
     {
         this._leaveRequestRepository = leaveRequestRepository;
         this._leaveAllocationRepository = leaveAllocationRepository;
         this._emailSender = emailSender;
+        this._logger = logger;
     }
 
     public async Task<Unit> Handle(CancelLeaveRequestCommand request, CancellationToken cancellationToken)
@@ -59,6 +62,7 @@ public class CancelLeaveRequestCommandHandler : IRequestHandler<CancelLeaveReque
         catch (Exception)
         {
             // log error
+            _logger.LogWarning($"Error sending email to user {leaveRequest.RequestingEmployeeID} about leave request cancellation.");
         }
 
         return Unit.Value;

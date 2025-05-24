@@ -62,6 +62,10 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
         {
             _appLogger.LogWarning(ex.Message);
         }
+        finally
+        {
+            _appLogger.LogInformation("Leave Request Updated");
+        }
 
         return Unit.Value;
     }

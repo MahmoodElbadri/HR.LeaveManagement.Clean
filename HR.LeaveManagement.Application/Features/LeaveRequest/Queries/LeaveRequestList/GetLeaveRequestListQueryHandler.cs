@@ -18,7 +18,7 @@ public class GetLeaveRequestListQueryHandler : IRequestHandler<GetLeaveRequestLi
     public async Task<List<LeaveRequestListDto>> Handle(GetLeaveRequestListQuery request,
         CancellationToken cancellationToken)
     {
-        var leaveRequest = await _repo.GetLeaveRequestsWithDetails();
-        return _mapper.Map<List<LeaveRequestListDto>>(leaveRequest);
+        var leaveRequests = await _repo.GetLeaveRequestsWithDetails();
+        return _mapper.Map<List<LeaveRequestListDto>>(leaveRequests);
     }
 }
