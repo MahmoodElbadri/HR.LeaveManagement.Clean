@@ -39,9 +39,9 @@ public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAl
             _logger.LogWarning($"There are some validation errors {0} - {1}", nameof(LeaveAllocation), request.LeaveTypeID);
             throw new BadRequestException("There are some validation errors", validationResult);
         }
-        var allocations = new List<Domain.LeaveAllocation>();
+
         var leaveAllocationModel = _mapper.Map<Domain.LeaveAllocation>(request);
-        allocations.Add(leaveAllocationModel);
+        await _leaveAllocationRepo.CreateAsync(leaveAllocationModel);
         return Unit.Value;
     }
 }

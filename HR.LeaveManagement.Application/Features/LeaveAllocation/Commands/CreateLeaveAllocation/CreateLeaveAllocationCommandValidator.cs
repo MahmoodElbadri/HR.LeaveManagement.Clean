@@ -15,8 +15,8 @@ public class CreateLeaveAllocationCommandValidator : AbstractValidator<CreateLea
     public CreateLeaveAllocationCommandValidator(ILeaveAllocationRepository repo)
     {
         RuleFor(tmp => tmp.LeaveTypeID).NotEmpty()
-            .MustAsync(MustExist).
-            WithMessage("Leave Allocation must exist")
+            .MustAsync(MustExist)
+            .WithMessage("Leave Allocation must exist")
             .GreaterThan(0);
         this._repo = repo;
     }
