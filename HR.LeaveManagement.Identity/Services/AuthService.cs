@@ -41,8 +41,21 @@ public class AuthService : IAuthService
         }
         // Generate JWT Token
         JwtSecurityToken token = await GenerateToken(user);
+        var response = new AuthResponse
+        {
+            Email = user.Email,
+            ID = user.Id,
+            Token = new JwtSecurityTokenHandler().WriteToken(token),
+            UserName = user.UserName,
+        };
+        return response;
     }
 
+
+    public Task<RegistrationResponse> Register(RegistrationRequest request)
+    {
+
+    }
     private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
     {
         var userClaims = await _userManager.GetClaimsAsync(user); //claims here specifies the user's roles
@@ -70,10 +83,5 @@ public class AuthService : IAuthService
             );
 
         return jwtSecurityToken;
-    }
-
-    public Task<RegistrationResponse> Register(RegistrationRequest request)
-    {
-        throw new NotImplementedException();
     }
 }
