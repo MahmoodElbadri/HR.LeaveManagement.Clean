@@ -30,8 +30,15 @@ public class UserService : IUserService
         };
     }
 
-    public Task<List<Employee>> GetEmployees()
+    public async Task<List<Employee>> GetEmployees()
     {
-        throw new NotImplementedException();
+        var employees = await _userManager.GetUsersInRoleAsync("Employee");
+        return employees.Select(tmp => new Employee
+        {
+            Id = tmp.Id,
+            Email = tmp.Email,
+            FirstName = tmp.FirstName,
+            LastName = tmp.LastName
+        }).ToList();
     }
 }
