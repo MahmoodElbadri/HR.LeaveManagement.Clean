@@ -52,9 +52,23 @@ public class AuthService : IAuthService
     }
 
 
-    public Task<RegistrationResponse> Register(RegistrationRequest request)
+    public async Task<RegistrationResponse> Register(RegistrationRequest request)
     {
-
+        var user = new ApplicationUser
+        {
+            Email = request.Email,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            UserName = request.Email,
+            EmailConfirmed = true
+        };
+        var result = await _userManager.CreateAsync(user, request.Password);
+        if (result.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(user, "Employee");
+            return new RegistrationResponse { UserId = user.Id };
+        }
+        throw new BadRequestException($"{result.Errors}");
     }
     private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
     {
